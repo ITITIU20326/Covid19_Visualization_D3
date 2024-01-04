@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Our World in Depression</title>
+    <link rel="stylesheet" href="styles/style.css" />
+    <link rel="stylesheet" href="styles/normalize.css" />
+    <script
+      src="https://kit.fontawesome.com/7b9a1721c6.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="page.js"></script>
+<!--    <script src="scripts/map/population.js"></script>-->
+  </head>
+  <body>
+    <div id="header">
+      
+    </div>
+
+    <div class="main-page">
+      <div class="header-title">
+        <h2 id="header-title--article">THE GLOBAL VIEW</h2>
+      </div>
+
+      <label class="select-option" for="years-menu"></label
+      ><select id="years-menu"></select>
+      <button class="button-main" id="button-1" onclick="redirectToPage(1)">
+        <h1 class="button-text button-text-1"></h1>
+      </button>
+      <button class="button-main" id="button-2" onclick="redirectToPage(2)">
+        <h1 class="button-text button-text-2"></h1>
+      </button>
+      <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+      <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
+      <script src="map/population.js"></script>
+      <script src="map/age.js"></script>
+    </div>
+  </body>
+</html>
