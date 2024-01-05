@@ -163,7 +163,7 @@
 }
 
 #button-2:hover .button-text:after {
-  content: "AGE";
+  content: "Total Cases";
   margin-left: -11px;
 }
 
@@ -181,94 +181,8 @@
 }
 
 #button-2.active .button-text:after {
-  content: "AGE";
+  content: "Total Cases";
   margin-left: -11px;
-}
-
-#button-3 {
-    left: -1%;
-    right: 94%;
-    top: 274%;
-    bottom: -232%;
-    transition: right 0.3s ease-in-out;
-}
-
-#button-3:hover {
-  right: 79%;
-}
-
-.button-text-3::before {
-  content: "3";
-}
-
-#button-3:hover .button-text-3::before {
-  content: "";
-}
-
-#button-3:hover .button-text:after {
-  content: "SUICIDE";
-  margin-left: -6px;
-}
-
-#button-3:active,
-#button-3.active {
-  right: 79%;
-}
-
-.button-text-3.active::before {
-  content: "";
-}
-
-#button-3.active .button-text-3::before {
-  content: "";
-}
-
-#button-3.active .button-text:after {
-  content: "SUICIDE";
-  margin-left: -6px;
-}
-
-#button-4 {
-    left: -1%;
-    right: 94%;
-    top: 346%;
-    bottom: -304%;
-    transition: right 0.3s ease-in-out;
-}
-
-#button-4:hover {
-  right: 79%;
-}
-
-.button-text-4::before {
-  content: "4";
-}
-
-#button-4:hover .button-text-4::before {
-  content: "";
-}
-
-#button-4:hover .button-text:after {
-  content: "DISORDER";
-  margin-left: 0;
-}
-
-#button-4:active,
-#button-4.active {
-  right: 79%;
-}
-
-.button-text-4.active::before {
-  content: "";
-}
-
-#button-4.active .button-text-4::before {
-  content: "";
-}
-
-#button-4.active .button-text:after {
-  content: "DISORDER";
-  margin-left: 0;
 }
 
 .button-text {

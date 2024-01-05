@@ -89,7 +89,7 @@ function population() {
         svg.selectAll("path")
             .transition()
             .style("fill", function (d) {
-                return centered && d === centered ? "lightgreen" : "#25498a";
+                return centered && d === centered ? "#66CC33" : "#25498a";
             });
         } else {
             // Nếu nước đã được click rồi, thì thu nhỏ lại
@@ -98,9 +98,10 @@ function population() {
                 .call(
                     zoomFunction.transform,
                     d3.zoomIdentity
-                        .translate(width / 2, height / 2)
+                        .translate(width/30, height/30 )
                         .scale(1)
                         .translate(0, 0)
+                     
                 );
 
             // Reset trạng thái để chuẩn bị cho lần click tiếp theo
@@ -110,6 +111,7 @@ function population() {
             svg.selectAll("path")
                 .transition()
                 .style("fill", "#25498a");
+            update2023()    
         }
 
         // Ngăn chặn sự kiện click lan toả đến các element khác
@@ -189,7 +191,7 @@ function population() {
 
         function draw (error, world) {
             if (error) throw error;
-
+            console.log(world);
             // create a group for the land path elements
             const landGroup = svg.append("g");
 
