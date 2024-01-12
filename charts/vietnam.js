@@ -12,7 +12,7 @@ function vietnam() {
   };
 
   d3.csv(
-    "data/vietnam-cases.csv",
+    "data/vietnam-vaccine.csv",
     rowConverter,
     function (error, data) {
       if (!error) {
