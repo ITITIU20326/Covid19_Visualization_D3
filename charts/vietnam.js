@@ -2,6 +2,7 @@ function vietnam() {
   const width = 1600;
   const height = 500;
   let padding = 90;
+  let duration = 5000; // Duration of the time-lapse animation in milliseconds
 
   let rowConverter = function (d) {
     return {
@@ -23,8 +24,8 @@ function vietnam() {
         let dateScale = d3
           .scaleTime()
           .domain([
-            new Date("2021-01-01"),
-            new Date("2023-12-31"),
+            new Date("2021-03-07"),
+            new Date("2023-06-30"),
           ])
           .range([padding, width - padding * 2]);
 
@@ -51,6 +52,28 @@ function vietnam() {
           .style("stroke-width", 4)
           .style("fill", "none")
           .attr("class", "vaccinations-line");
+
+        // Create focus group
+        let focusGroup = svg.append("g")
+          .attr("class", "focus-group");
+
+        // Create focus circle
+        let focusCircle = focusGroup.append("circle")
+          .attr("class", "focus-circle")
+          .attr("r", 6)
+          .attr("fill", "none")
+          .attr("stroke", "black")
+          .attr("stroke-width", 4)
+          .style("opacity", 0); // Initially hidden
+
+        // Update focus circle
+        function updateFocus(selectedData) {
+          // Update focus circle
+          focusCircle
+            .attr("cx", dateScale(selectedData.date))
+            .attr("cy", vaccinationsScale(selectedData.total_vaccinations))
+            .style("opacity", 1);
+        }
 
         let dateAxis = d3
           .axisBottom(dateScale)
@@ -90,6 +113,9 @@ function vietnam() {
           })
           .on("mouseout", function () {
             tooltip.style("opacity", 0);
+            // Remove focus circle and text on mouseout
+            focusCircle.style("opacity", 0);
+            focusTextGroup.selectAll(".focus-text").remove();
           })
           .on("mousemove", function () {
             let [x, y] = d3.mouse(this);
@@ -98,14 +124,36 @@ function vietnam() {
             let selectedData = data[i];
 
             tooltip
-              .html("Date: " + selectedData.date.toLocaleDateString() + "<br>Vaccinations: " + selectedData.total_vaccinations)
+              .html("Date: " + selectedData.date.toLocaleDateString() + "<br>Vaccinations: " + selectedData.total_vaccinations.toLocaleString())
               .style("left", x + 10 + "px")
               .style("top", y - 10 + "px");
+
+            // Update focus circle and text
+            updateFocus(selectedData);
           });
 
         let bisect = d3.bisector(function (d) {
           return d.date;
         }).left;
+
+        // Time-lapse function
+        function startTimelapse() {
+          let totalLength = vaccinationsChart.node().getTotalLength();
+          
+          vaccinationsChart
+            .attr("stroke-dasharray", totalLength + " " + totalLength)
+            .attr("stroke-dashoffset", totalLength)
+            .transition()
+            .duration(duration)
+            .ease(d3.easeLinear)
+            .attr("stroke-dashoffset", 0);
+        }
+
+        // Trigger time-lapse on button click
+        d3.select("#startTimelapseButton")
+          .on("click", function () {
+            startTimelapse();
+          });
       }
     }
   );
