@@ -65,7 +65,7 @@ function vietnam() {
           .attr("stroke", "black")
           .attr("stroke-width", 4)
           .style("opacity", 0); // Initially hidden
-
+        
         // Update focus circle
         function updateFocus(selectedData) {
           // Update focus circle
