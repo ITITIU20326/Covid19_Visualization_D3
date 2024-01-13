@@ -147,10 +147,6 @@ function population() {
             svg.selectAll("path")
                 .transition()
                 .style("fill", "#25498a");
-<<<<<<< HEAD
-               
-=======
->>>>>>> 40bee7c01166428a68f96f297c1c07e4f665883a
         }
 
         // Ngăn chặn sự kiện click lan toả đến các element khác
@@ -214,9 +210,7 @@ function population() {
     const colorScale = d3.scaleThreshold()
         .domain([1000000, 10000000, 5000000, 10000000, 50000000, 100000000, 500000000, 1000000000, 2000000000])
         .range(d3.schemeGreens[9]);
-<<<<<<< HEAD
-=======
-        
+
 
     function update2019() {
         svg.selectAll(".state").remove();
@@ -342,7 +336,6 @@ function population() {
         .domain([40000, 100000, 1000000, 10000000, 50000000, 100000000, 2000000000])
         .range(d3.schemeGreens[7]);
 
->>>>>>> 40bee7c01166428a68f96f297c1c07e4f665883a
         function update2020() {
             svg.selectAll(".state").remove();
     
