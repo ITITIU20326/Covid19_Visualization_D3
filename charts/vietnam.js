@@ -150,7 +150,7 @@ function vietnam() {
         }
 
         // Trigger time-lapse on button click
-        d3.select("#startTimelapseButton")
+        d3.select("#timeLapseButton")
           .on("click", function () {
             startTimelapse();
           });

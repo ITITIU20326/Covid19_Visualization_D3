@@ -18,22 +18,15 @@ function redirectToPage(loggedIn) {
       }
       button.classList.toggle("active");
       activeButton = button;
-      age();
+      cases();
     } else if (loggedIn === 3) {
       if (activeButton != null && activeButton !== button) {
         activeButton.classList.remove("active");
       }
       button.classList.toggle("active");
       activeButton = button;
-      suicide();
-    } else if (loggedIn === 4) {
-      if (activeButton != null && activeButton !== button) {
-        activeButton.classList.remove("active");
-      }
-      button.classList.toggle("active");
-      activeButton = button;
-      disorder();
-    }
+      vaccine();
+    } 
   }
 }
 

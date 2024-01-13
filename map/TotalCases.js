@@ -1,10 +1,46 @@
-function age() {
+function cases() {
+    
+    const intervalDuration = 1000; // Time between transitions in milliseconds (adjust as needed)
+    let currentYearIndex = 0; // Index to keep track of the current year
+    let timeLapseInterval; // Variable to store the interval ID
+    function updateYear() {
+        const selectedOption = years[currentYearIndex].value;
+
+        // Call the corresponding update function based on the current year
+        if (selectedOption === "data2") {
+            update2021();
+        } else if (selectedOption === "data3") {
+            update2022();
+        } else if (selectedOption === "data4") {
+            update2023();
+        } else {
+            update2020();
+        }
+
+        // Move to the next year
+        currentYearIndex = (currentYearIndex + 1) % years.length;
+        if (selectedOption === "data4") {
+            clearInterval(timeLapseInterval);
+        }
+    }
+
+    // Set up the interval for the time-lapse effect when the button is clicked
+    function startTimeLapse() {
+        timeLapseInterval = setInterval(updateYear, intervalDuration);
+    }
+
+    // Stop the time-lapse when the user clicks on the map
+    d3.select("body").on("click", function () {
+        clearInterval(timeLapseInterval);
+    });
+
+    // Add a click event listener to the Time Lapse button
+    d3.select("#timeLapseButton").on("click", startTimeLapse);
     const width = 960,
         height = 480;
 
     const years = [
-        {year: 2019, value: "data1"}, {year: 2020, value: "data2"}, {year: 2021, value: "data3"}, {year: 2022, value: "data4"},
-        {year: 2023, value: "data5"}
+        {year: 2020, value: "data1"}, {year: 2021, value: "data2"}, {year: 2022, value: "data3"}, {year: 2023, value: "data4"},
     ]
 
     const options = [
@@ -174,93 +210,92 @@ function age() {
     const colorScale = d3.scaleThreshold()
         .domain([1000, 10000, 100000, 1000000, 10000000, 100000000, 1000000000, 10000000000, 100000000])
         .range(d3.schemeRdPu[9]);
-        
-    function update2020() {
-        svg.selectAll(".state").remove();
-
-        d3.queue()
-            .defer(d3.json, "data/world.geojson")
-            .defer(d3.csv, "data/total_cases.csv", function(d) {
-                data.set(d.Code, +d.Case_2020)
-            })
-            .await(draw);
-
-        function draw (error, world) {
-            if (error) throw error;
-            // create a group for the land path elements
-            const landGroup = svg.append("g");
-
-            // create a tooltip element and hide it initially
-            const tooltip = d3.select("body").append("div")
-                .attr("class", "tooltip")
-                .style("opacity", 0); 
-
-            // add the land areas to the map as path elements
-            landGroup.selectAll("path")
-                .data(world.features)
-                .enter()
-                .append("path")
-                // draw each country
-                .attr("d", d3.geoPath()
-                    .projection(projection)
-                )
-                // set the color of each country
-                .attr("fill", function (d) {
-                    d.total = data.get(d.id) || 0;
-                    return colorScale(d.total);
+        function update2020() {
+            svg.selectAll(".state").remove();
+    
+            d3.queue()
+                .defer(d3.json, "data/world.geojson")
+                .defer(d3.csv, "data/total_cases.csv", function(d) {
+                    data.set(d.Code, +d.Case_2020) 
                 })
-                .style("stroke", "transparent")
-                .attr("class", function(d){ return "Country" } )
-                .style("opacity", .8)
-                // add event handlers for mouseover and mouseout events
-                .on("mouseover", function(d) {
-                    // change the fill color of the hovered path element
-                    d3.selectAll(".Country")
-                        .transition()
-                        .duration(200)
-                        .style("opacity", .5);
-                    d3.select(this)
-                        .transition()
-                        .duration(200)
-                        .style("opacity", 1)
-                        .style("stroke", "black");
-                    // show tooltip with country name and total value
-                    tooltip.html(`<strong>${d.properties.name}</strong><br/>Total Cases: ${d.total.toLocaleString()}`)
-                        .style("left", (d3.event.pageX + 10) + "px")
-                        .style("top", (d3.event.pageY + 10) + "px")
-                        .transition()
-                        .duration(200)
-                        .style("opacity", .9);
-                })
-                .on("mouseout", function(d) {
-                    // change the fill color of the previously hovered path element
-                    d3.selectAll(".Country")
-                        .transition()
-                        .duration(200)
-                        .style("opacity", .8);
-                    d3.select(this)
-                        .transition()
-                        .duration(200)
-                        .style("stroke", "transparent");
-                    // hide tooltip
-                    tooltip.transition()
-                        .duration(200)
-                        .style("opacity", 0);
-                });
+                .await(draw);
+    
+            function draw (error, world) {
+                if (error) throw error;
+                // create a group for the land path elements
+                const landGroup = svg.append("g");
+    
+                // create a tooltip element and hide it initially
+                const tooltip = d3.select("body").append("div")
+                    .attr("class", "tooltip")
+                    .style("opacity", 0); 
+    
+                // add the land areas to the map as path elements
+                landGroup.selectAll("path")
+                    .data(world.features)
+                    .enter()
+                    .append("path")
+                    // draw each country
+                    .attr("d", d3.geoPath()
+                        .projection(projection)
+                    )
+                    // set the color of each country
+                    .attr("fill", function (d) {
+                        d.total = data.get(d.id) || 0;
+                        return colorScale(d.total);
+                    })
+                    .style("stroke", "transparent")
+                    .attr("class", function(d){ return "Country" } )
+                    .style("opacity", .8)
+                    // add event handlers for mouseover and mouseout events
+                    .on("mouseover", function(d) {
+                        // change the fill color of the hovered path element
+                        d3.selectAll(".Country")
+                            .transition()
+                            .duration(200)
+                            .style("opacity", .5);
+                        d3.select(this)
+                            .transition()
+                            .duration(200)
+                            .style("opacity", 1)
+                            .style("stroke", "black");
+                        // show tooltip with country name and total value
+                        tooltip.html(`<strong>${d.properties.name}</strong><br/>Total Cases: ${d.total.toLocaleString()}`)
+                            .style("left", (d3.event.pageX + 10) + "px")
+                            .style("top", (d3.event.pageY + 10) + "px")
+                            .transition()
+                            .duration(200)
+                            .style("opacity", .9);
+                    })
+                    .on("mouseout", function(d) {
+                        // change the fill color of the previously hovered path element
+                        d3.selectAll(".Country")
+                            .transition()
+                            .duration(200)
+                            .style("opacity", .8);
+                        d3.select(this)
+                            .transition()
+                            .duration(200)
+                            .style("stroke", "transparent");
+                        // hide tooltip
+                        tooltip.transition()
+                            .duration(200)
+                            .style("opacity", 0);
+                    });
+            }
         }
-    }
-
-    update2020();
+    
+        update2020();
 
     d3.select("#years-menu").on("change", function() {
         const selectedOption = d3.select(this).property("value");
-        if (selectedOption === "data3") {
+        if (selectedOption === "data2") {
             update2021();
         }
-        else if (selectedOption === "data4") {
+        else if (selectedOption === "data3") {
             update2022();
         }
-        else if (selectedOption === "data5") {
+        else if (selectedOption === "data4") {
             update2023();
         }
         else {
@@ -287,6 +322,8 @@ function age() {
             };
         };
     }
+    
+    
     function update2021() {
         svg.selectAll(".state").remove();
 

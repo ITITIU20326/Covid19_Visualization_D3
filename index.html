@@ -25,6 +25,7 @@
       <div class="header-title">
         <h2 id="header-title--article">THE GLOBAL VIEW</h2>
       </div>
+      <button id="timeLapseButton">Time-Lapse</button>
 
       <label class="select-option" for="years-menu"></label
       ><select id="years-menu"></select>
@@ -34,10 +35,14 @@
       <button class="button-main" id="button-2" onclick="redirectToPage(2)">
         <h1 class="button-text button-text-2"></h1>
       </button>
+      <button class="button-main" id="button-3" onclick="redirectToPage(3)">
+        <h1 class="button-text button-text-3"></h1>
+      </button>
       <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
       <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
       <script src="map/population.js"></script>
       <script src="map/TotalCases.js"></script>
+      <script src="map/vaccine.js"></script>
       <button
         class="btn_nav"
         id="page-change-btn"
