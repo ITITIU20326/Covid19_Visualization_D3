@@ -53,7 +53,7 @@ function changeToPreviousPage(condition) {
 
 function changeToNextPage2(condition) {
   if (condition === true) {
-    window.location.href = "intro.html";
+    window.location.href = "vietnam-cases.html";
   } else {
     window.location.href = "not-found.html";
   }
@@ -111,7 +111,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const pageContainer = document.querySelector(".main-page-2");
       pageContainer.classList.add("hidden");
       setTimeout(function () {
-        window.location.href = "depress.html";
+        window.location.href = "vietnam-cases.html";
       }, 1500); // wait 0.5 seconds before navigating to next page
     });
   }
