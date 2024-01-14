@@ -412,3 +412,20 @@ margin-left: -6px;
   background-color: #D4ADFC;
   color: #19376D;
 }
+#startTimelapseButton {
+  position: absolute;
+  bottom: 10px; /* Adjust the distance from the bottom as needed */
+  left: 50%; /* Center the button horizontally */
+  transform: translateX(-50%); /* Adjust for centering */
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+#startTimelapseButton:hover {
+  background-color: #45a049;
+}
