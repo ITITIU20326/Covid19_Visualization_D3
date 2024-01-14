@@ -41,7 +41,16 @@ function population() {
         height = 480;
 
     const years = [
-        {year: 2020, value: "data1"}, {year: 2021, value: "data2"}, {year: 2022, value: "data3"}, {year: 2023, value: "data4"},
+        { year: "2020-12", value: "data1" },{ year: '2021-1', value: "data2" },
+            { year: '2021-2', value: "data3" },{ year: '2021-3', value: "data4" },{ year: '2021-4', value: "data5" },{ year: '2021-5', value: "data6" },
+            { year: '2021-6', value: "data7" },{ year: '2021-7', value: "data8" },{ year: '2021-8', value: "data9" },{ year: '2021-9', value: "data10" },
+            { year: '2021-10', value: "data11" },{ year: '2021-11', value: "data12" },{ year: '2021-12', value: "data13" },{ year: '2022-1', value: "data14" },
+            { year: '2022-2', value: "data15" },{ year: '2022-3', value: "data16" },{ year: '2022-4', value: "data17" },{ year: '2022-5', value: "data18" },
+            { year: '2022-6', value: "data19" },{ year: '2022-7', value: "data20" },{ year:'2022-8', value: "data21" },{ year: '2022-9', value: "data22" },
+            { year: '2022-10', value: "data23" },{ year: '2022-11', value: "data24" },{ year: '2022-12', value: "data25" },{ year: '2023-1', value: "data26" },
+            { year: '2023-2', value: "data27" },{ year: '2023-3', value: "data28" },{ year: '2023-4', value: "data29" },{ year: '2023-5', value: "data30" },
+            { year: '2023-6', value: "data31" },{ year: '2023-7', value: "data32" },{ year: '2023-8', value: "data33" },{ year: '2023-9', value: "data34" },
+            { year: '2023-10', value: "data35" },{ year: '2023-11', value: "data36" },{ year: '2023-12', value: "data37" },
     ]
     const options = [
         {name: "Equiangular (Plate Carrée)", projection: d3.geoEquirectangular()}
