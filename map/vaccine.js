@@ -1,5 +1,4 @@
 function vaccine() {
-    
     const intervalDuration = 1000; // Time between transitions in milliseconds (adjust as needed)
     let currentYearIndex = 0; // Index to keep track of the current year
     let timeLapseInterval; // Variable to store the interval ID
@@ -3203,5 +3202,5 @@ function vaccine() {
     }
 
     update2023_12();
-    
+
 }
