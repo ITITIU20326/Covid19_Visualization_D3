@@ -108,16 +108,16 @@ function cases() {
         height = 480;
 
         const years = [
-            { year: 2020-12, value: "data1" },{ year: 2021-1, value: "data2" },
-            { year: 2021-2, value: "data3" },{ year: 2021-3, value: "data4" },{ year: 2021-4, value: "data5" },{ year: 2021-5, value: "data6" },
-            { year: 2021-6, value: "data7" },{ year: 2021-7, value: "data8" },{ year: 2021-8, value: "data9" },{ year: 2021-9, value: "data10" },
-            { year: 2021-10, value: "data11" },{ year: 2021-11, value: "data12" },{ year: 2021-12, value: "data13" },{ year: 2022-1, value: "data14" },
-            { year: 2022-2, value: "data15" },{ year: 2022-3, value: "data16" },{ year: 2022-4, value: "data17" },{ year: 2022-5, value: "data18" },
-            { year: 2022-6, value: "data19" },{ year: 2022-7, value: "data20" },{ year: 2022-8, value: "data21" },{ year: 2022-9, value: "data22" },
-            { year: 2022-10, value: "data23" },{ year: 2022-11, value: "data24" },{ year: 2022-12, value: "data25" },{ year: 2023-1, value: "data26" },
-            { year: 2023-2, value: "data27" },{ year: 2023-3, value: "data28" },{ year: 2023-4, value: "data29" },{ year: 2023-5, value: "data30" },
-            { year: 2023-6, value: "data31" },{ year: 2023-7, value: "data32" },{ year: 2023-8, value: "data33" },{ year: 2023-9, value: "data34" },
-            { year: 2023-10, value: "data35" },{ year: 2023-11, value: "data36" },{ year: 2023-12, value: "data37" },
+            { year: "2020-12", value: "data1" },{ year: '2021-1', value: "data2" },
+            { year: '2021-2', value: "data3" },{ year: '2021-3', value: "data4" },{ year: '2021-4', value: "data5" },{ year: '2021-5', value: "data6" },
+            { year: '2021-6', value: "data7" },{ year: '2021-7', value: "data8" },{ year: '2021-8', value: "data9" },{ year: '2021-9', value: "data10" },
+            { year: '2021-10', value: "data11" },{ year: '2021-11', value: "data12" },{ year: '2021-12', value: "data13" },{ year: '2022-1', value: "data14" },
+            { year: '2022-2', value: "data15" },{ year: '2022-3', value: "data16" },{ year: '2022-4', value: "data17" },{ year: '2022-5', value: "data18" },
+            { year: '2022-6', value: "data19" },{ year: '2022-7', value: "data20" },{ year:'2022-8', value: "data21" },{ year: '2022-9', value: "data22" },
+            { year: '2022-10', value: "data23" },{ year: '2022-11', value: "data24" },{ year: '2022-12', value: "data25" },{ year: '2023-1', value: "data26" },
+            { year: '2023-2', value: "data27" },{ year: '2023-3', value: "data28" },{ year: '2023-4', value: "data29" },{ year: '2023-5', value: "data30" },
+            { year: '2023-6', value: "data31" },{ year: '2023-7', value: "data32" },{ year: '2023-8', value: "data33" },{ year: '2023-9', value: "data34" },
+            { year: '2023-10', value: "data35" },{ year: '2023-11', value: "data36" },{ year: '2023-12', value: "data37" },
 
         ];
         
@@ -270,7 +270,7 @@ function cases() {
             .duration(1000).ease(d3.easeLinear)
             .attrTween("d", projectionTween(projection, projection = option.projection))
     }
-
+    
 // Years
     const menuYear = d3.select("#years-menu")
         .style("border-radius", "3px")
@@ -287,7 +287,7 @@ function cases() {
     const data = d3.map();
 
     const colorScale = d3.scaleThreshold()
-        .domain([1000, 10000, 100000, 1000000, 10000000, 100000000, 1000000000, 10000000000, 100000000000])
+        .domain([0, 100000, 500000, 1000000, 5000000, 10000000, 50000000, 100000000, 200000000])
         .range(d3.schemeRdPu[9]);
         
         
@@ -2671,7 +2671,7 @@ function cases() {
     }
 
     update2023_5();
-    function update2021_6() {
+    function update2023_6() {
         svg.selectAll(".state").remove();
 
         d3.queue()
@@ -3201,7 +3201,38 @@ function cases() {
                 });
         }
     }
+    const legendData = [0, 100000, 500000, 1000000, 5000000, 10000000, 50000000, 100000000, 200000000];
+
+    const legend = svg.append("g")
+    .attr("class", "legend")
+    .attr("transform", "translate(20, 200)"); 
+
+    const legendRectSize = 18;
+    const legendSpacing = 4;
+
+    const legendItems = legend.selectAll("g.legend-item")
+    .data(legendData)
+    .enter()
+    .append("g")
+    .attr("class", "legend-item")
+    .attr("transform", function (d, i) {
+        return "translate(0," + i * (legendRectSize + legendSpacing) + ")";
+    });
+
+    legendItems.append("rect")
+    .attr("width", legendRectSize)
+    .attr("height", legendRectSize)
+    .style("fill", function (d) {
+        return colorScale(d);
+    });
+
+    legendItems.append("text")
+    .attr("x", legendRectSize + legendSpacing)
+    .attr("y", legendRectSize / 2)
+    .attr("dy", "0.35em")
+    .text(function (d) {
+        return d.toLocaleString();
+    });
 
     update2023_12();
-
 }

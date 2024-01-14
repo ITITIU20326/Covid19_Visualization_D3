@@ -208,7 +208,7 @@ function population() {
     const data = d3.map();
 
     const colorScale = d3.scaleThreshold()
-        .domain([1000000, 10000000, 5000000, 10000000, 50000000, 100000000, 500000000, 1000000000, 2000000000])
+        .domain([0, 1000000, 5000000, 10000000, 50000000, 100000000, 500000000, 1000000000, 2000000000])
         .range(d3.schemeGreens[9]);
 
 
@@ -688,38 +688,38 @@ function population() {
                     });
             }
         }
-   const legendData = [0, 1000000, 5000000, 10000000, 50000000, 100000000, 500000000, 1000000000, 2000000000];
+    const legendData = [0, 1000000, 5000000, 10000000, 50000000, 100000000, 500000000, 1000000000, 2000000000];
 
-   const legend = svg.append("g")
-   .attr("class", "legend")
-   .attr("transform", "translate(20, 200)"); 
+    const legend = svg.append("g")
+    .attr("class", "legend")
+    .attr("transform", "translate(20, 200)"); 
 
-const legendRectSize = 18;
-const legendSpacing = 4;
+    const legendRectSize = 18;
+    const legendSpacing = 4;
 
-const legendItems = legend.selectAll("g.legend-item")
-   .data(legendData)
-   .enter()
-   .append("g")
-   .attr("class", "legend-item")
-   .attr("transform", function (d, i) {
-       return "translate(0," + i * (legendRectSize + legendSpacing) + ")";
-   });
+    const legendItems = legend.selectAll("g.legend-item")
+    .data(legendData)
+    .enter()
+    .append("g")
+    .attr("class", "legend-item")
+    .attr("transform", function (d, i) {
+        return "translate(0," + i * (legendRectSize + legendSpacing) + ")";
+    });
 
-legendItems.append("rect")
-   .attr("width", legendRectSize)
-   .attr("height", legendRectSize)
-   .style("fill", function (d) {
-       return colorScale(d);
-   });
+    legendItems.append("rect")
+    .attr("width", legendRectSize)
+    .attr("height", legendRectSize)
+    .style("fill", function (d) {
+        return colorScale(d);
+    });
 
-legendItems.append("text")
-   .attr("x", legendRectSize + legendSpacing)
-   .attr("y", legendRectSize / 2)
-   .attr("dy", "0.35em")
-   .text(function (d) {
-       return d.toLocaleString();
-   });
+    legendItems.append("text")
+    .attr("x", legendRectSize + legendSpacing)
+    .attr("y", legendRectSize / 2)
+    .attr("dy", "0.35em")
+    .text(function (d) {
+        return d.toLocaleString();
+    });
 
 
 }
